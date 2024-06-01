@@ -1,0 +1,9 @@
+{
+  "name": "music-sync",
+  "version": "0.0.1",
+  "description": "Music synchronising code",
+  "main": "index.js",
+  "repository": "git@github.com:AT2406/music-sync.git",
+  "author": "Ali T <ali@turk.bh>",
+  "license": "MIT"
+}
