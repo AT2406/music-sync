@@ -13,6 +13,7 @@
   "scripts": {
     "build:windows": "rd /s /q dist && tsc && robocopy /mir /create src/data dist/data",
     "build:linux": "rm -rf ./dist && tsc && cp -r ./src/data ./dist/data",
+    "test-run": "yarn build:windows &&  node ./dist/index.js",
     "types": "tsc --noEmit",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
@@ -35,6 +36,7 @@
     "axios": "^1.7.2",
     "eslint": "^8.57.0",
     "node-ts": "^6.0.1",
+    "open": "^10.1.0",
     "tsc": "^2.0.4",
     "typescript": "^5.4.5"
   }

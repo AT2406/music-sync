@@ -16,7 +16,9 @@
       "never"
     ],
     "@typescript-eslint/no-extra-semi": "off",
-    "no-console": "warn"
+    "no-console": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn"
   },
   "ignorePatterns": [
     "dist/**"
