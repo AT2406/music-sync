@@ -1,3 +1,5 @@
-console.error('Hello world!')
+function test() {
+  console.log('Hello world!')
+}
 
-function create() {}
+test()

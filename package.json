@@ -11,7 +11,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf ./dist && tsc && cp -r ./src/data ./dist/data",
+    "build:windows": "rd /s /q dist && tsc && robocopy /mir /create src/data dist/data",
+    "build:linux": "rm -rf ./dist && tsc && cp -r ./src/data ./dist/data",
     "types": "tsc --noEmit",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
