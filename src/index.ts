@@ -1,12 +1,23 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 import { parse } from 'url'
 import { URLSearchParams } from 'url'
+import * as querystring from 'querystring'
+import * as randomstring from 'randomstring'
+import { clientInformation, spotifyEndpoints } from './utils/constants'
 
 const port = 3000
-const clientId = '0799d3758a7e4c4aa97d4e71c838d4c6'
 const redirectUri = `http://localhost:${port}/callback`
 const scope = 'user-read-private user-read-email'
-const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}&show_dialog=true`
+const auth = querystring.stringify({
+  response_type: 'code',
+  client_id: clientInformation.clientId,
+  scope: scope,
+  redirect_uri: redirectUri,
+  state: randomstring.generate(16),
+  show_dialog: true,
+})
+
+const authUrl = `${spotifyEndpoints.accountAuth}${auth}`
 
 const requestHandler = (req: IncomingMessage, res: ServerResponse): void => {
   const parsedUrl = parse(req.url || '', true)
@@ -30,6 +41,7 @@ const server = createServer(requestHandler)
 server.listen(port, async () => {
   console.log(`Server started at http://localhost:${port}`)
   // Dynamically import and use the `open` module
-  const open = (await import('open')).default
-  await open(authUrl, { app: { name: 'google chrome' } })
+  // const open = (await import('open')).default
+  // await open(authUrl, { app: { name: 'google chrome' } })
+  console.log('auth url:', authUrl)
 })
