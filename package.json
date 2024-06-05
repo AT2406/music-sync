@@ -6,14 +6,15 @@
   "repository": "git@github.com:AT2406/music-sync.git",
   "author": "Ali T <ali@turk.bh>",
   "license": "MIT",
+  "type": "module",
   "files": [
     "README.md",
     "dist"
   ],
   "scripts": {
-    "build:windows": "rd /s /q dist && tsc && robocopy /mir /create src/data dist/data",
+    "build:windows": "rd /s /q dist && yarn tsc && xcopy /s /e /y .\\src\\data\\output\\ .\\dist\\data\\output\\",
     "build:linux": "rm -rf ./dist && tsc && cp -r ./src/data ./dist/data",
-    "test-run": "yarn build:windows &&  node ./dist/index.js",
+    "test-run": "yarn build:windows && node ./dist/index.js",
     "types": "tsc --noEmit",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"

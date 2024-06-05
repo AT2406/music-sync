@@ -1,11 +1,10 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 import { parse } from 'url'
 import { URLSearchParams } from 'url'
-import open from 'open'
 
-const port = 8888
+const port = 3000
 const clientId = '0799d3758a7e4c4aa97d4e71c838d4c6'
-const redirectUri = 'http://localhost:8888/callback'
+const redirectUri = `http://localhost:${port}/callback`
 const scope = 'user-read-private user-read-email'
 const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirectUri)}&show_dialog=true`
 
@@ -30,6 +29,7 @@ const server = createServer(requestHandler)
 
 server.listen(port, async () => {
   console.log(`Server started at http://localhost:${port}`)
-  // Open the authorization URL in the default web browser
+  // Dynamically import and use the `open` module
+  const open = (await import('open')).default
   await open(authUrl, { app: { name: 'google chrome' } })
 })
