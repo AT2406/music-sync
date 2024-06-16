@@ -5,8 +5,13 @@ import * as querystring from 'querystring'
 import * as randomstring from 'randomstring'
 import { clientInformation, spotifyEndpoints } from './utils/constants'
 
-const port = 3000
-const redirectUri = `http://localhost:${port}/callback`
+try {
+  console.log(clientInformation)
+} catch (err) {
+  console.error('cannot find client information', err)
+}
+
+const redirectUri = 'http://localhost:3000/callback'
 const scope = 'user-read-private user-read-email'
 const auth = querystring.stringify({
   response_type: 'code',
@@ -38,11 +43,7 @@ const requestHandler = (req: IncomingMessage, res: ServerResponse): void => {
 
 const server = createServer(requestHandler)
 
-server.listen(port, async () => {
+server.listen(3000, async () => {
   console.log(`Server started at ${redirectUri}`)
   console.log('auth url:', authUrl)
 })
-
-// Dynamically import and use the `open` module
-const open = (await import('open')).default
-await open(authUrl, { app: { name: 'google chrome' } })
