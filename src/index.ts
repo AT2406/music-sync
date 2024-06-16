@@ -4,6 +4,7 @@ import { URLSearchParams } from 'url'
 import * as querystring from 'querystring'
 import * as randomstring from 'randomstring'
 import { clientInformation, spotifyEndpoints } from './utils/constants'
+import 'dotenv/config'
 
 try {
   console.log(clientInformation)
