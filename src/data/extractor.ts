@@ -4,12 +4,7 @@ import * as cheerio from 'cheerio'
 async function fetchAndParse(url: string) {
   try {
     // Make an HTTP GET request to fetch the raw HTML content
-    const response = await axios.get(url, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0',
-      },
-    })
+    const response = await axios.get(url)
 
     // Load the HTML content using Cheerio
     const $ = cheerio.load(response.data)
@@ -17,19 +12,44 @@ async function fetchAndParse(url: string) {
     // Find the div with slot="text-body"
     const textBodyDiv = $('div[slot="text-body"]')
 
-    // If the div exists, find all h3 headers within it
-    const h3Headers: string[] = []
+    // Object to hold the headers and their associated paragraphs
+    const headersWithParagraphs: { [key: string]: string[] } = {}
+
+    // Iterate through each h3 in the text body div
     textBodyDiv.find('h3').each((_index, element) => {
-      const h3Text = $(element).text().trim()
-      h3Headers.push(h3Text)
+      const headerText = $(element).text().trim()
+      const paragraphs: string[] = []
+
+      // Get the next siblings until we hit another h3 or the end
+      let next = $(element).next()
+      while (next.length && !next.is('h3')) {
+        if (next.is('ul')) {
+          // Iterate through each li inside the ul
+          next.find('li').each((_liIndex, liElement) => {
+            // Extract text from p elements within li
+            $(liElement)
+              .find('p')
+              .each((_pIndex, pElement) => {
+                // Get the text content and split by "|"
+                const text = $(pElement).text().trim()
+                const [textBeforePipe] = text.split('|')
+                paragraphs.push(textBeforePipe.trim())
+              })
+          })
+        }
+        next = next.next()
+      }
+
+      // Add the header and its associated paragraphs to the object
+      headersWithParagraphs[headerText] = paragraphs
     })
 
     // Log or return the extracted content
-    console.log(h3Headers)
-    return h3Headers
+    console.log(headersWithParagraphs)
+    return headersWithParagraphs
   } catch (error) {
     console.error('Error fetching or parsing the HTML:', error)
-    return []
+    return {}
   }
 }
 
