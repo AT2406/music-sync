@@ -12,8 +12,8 @@ async function fetchAndParse(url: string) {
     // Find the div with slot="text-body"
     const textBodyDiv = $('div[slot="text-body"]')
 
-    // Object to hold the headers and their associated paragraphs
-    const headersWithParagraphs: { [key: string]: string[] } = {}
+    // Array to hold objects with headers and their associated paragraphs
+    const result: { genre: string; songs: string[] }[] = []
 
     // Iterate through each h3 in the text body div
     textBodyDiv.find('h3').each((_index, element) => {
@@ -33,23 +33,25 @@ async function fetchAndParse(url: string) {
                 // Get the text content and split by "|"
                 const text = $(pElement).text().trim()
                 const [textBeforePipe] = text.split('|')
-                paragraphs.push(textBeforePipe.trim())
+                if (textBeforePipe.trim()) {
+                  paragraphs.push(textBeforePipe.trim())
+                }
               })
           })
         }
         next = next.next()
       }
 
-      // Add the header and its associated paragraphs to the object
-      headersWithParagraphs[headerText] = paragraphs
+      // Add the header and its associated paragraphs to the array
+      result.push({ genre: headerText, songs: paragraphs })
     })
 
     // Log or return the extracted content
-    console.log(headersWithParagraphs)
-    return headersWithParagraphs
+    console.log(result)
+    return result
   } catch (error) {
     console.error('Error fetching or parsing the HTML:', error)
-    return {}
+    return []
   }
 }
 
