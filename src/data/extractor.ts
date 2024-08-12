@@ -5,7 +5,9 @@ import * as fs from 'fs'
 
 const songDetailRegex = /^(.+?) - (.+?) \[(.+)\]$/
 
-export async function fetchAndParse(url: string): Promise<Releases[]> {
+export async function fetchAndParseRedditPost(
+  url: string
+): Promise<Releases[]> {
   try {
     const response = await axios.get(url)
     const $ = cheerio.load(response.data)

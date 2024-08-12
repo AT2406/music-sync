@@ -1,6 +1,6 @@
 import 'dotenv/config'
 // import { useAPI } from './requests/soundcloud/tracks-and-playlists'
-import { fetchAndParse } from './data/extractor'
+import { fetchAndParseRedditPost } from './data/extractor'
 
 // URL of the Reddit post
 const url =
@@ -8,4 +8,4 @@ const url =
 // 'https://www.reddit.com/r/DnB/comments/1ekmc2b/new_tunes_spor_annix_amc_visla_wilkinson_sub/'
 // 'https://www.reddit.com/r/DnB/comments/1eqay7r/new_music_pola_brysons_circles_chase_status_serum/'
 
-fetchAndParse(url)
+fetchAndParseRedditPost(url)
