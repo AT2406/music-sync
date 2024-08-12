@@ -4,7 +4,6 @@ import { Releases, SongDetails } from '../types'
 import * as fs from 'fs'
 
 const songDetailRegex = /^(.+?) - (.+?) \[(.+)\]$/
-
 export async function fetchAndParseRedditPost(
   url: string
 ): Promise<Releases[]> {
