@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 import { Releases, SongDetails } from '../types'
-import * as fs from 'fs' // Importing the fs module
+import * as fs from 'fs'
 
 const songDetailRegex = /^(.+?) - (.+?) \[(.+)\]$/
 
@@ -70,12 +70,3 @@ export async function fetchAndParse(url: string): Promise<Releases[]> {
     return []
   }
 }
-
-// URL of the Reddit post
-const url =
-  'https://www.reddit.com/r/DnB/comments/1eexbxi/fresh_music_unglued_high_hardie_culture_shock_tim/'
-// 'https://www.reddit.com/r/DnB/comments/1ekmc2b/new_tunes_spor_annix_amc_visla_wilkinson_sub/'
-// 'https://www.reddit.com/r/DnB/comments/1eqay7r/new_music_pola_brysons_circles_chase_status_serum/'
-
-// Call the function to fetch and parse the HTML
-fetchAndParse(url)
