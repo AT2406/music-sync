@@ -17,7 +17,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     headless: false,
-    viewport: { width: 1920, height: 1080 },
+    viewport: { width: 1280, height: 720 },
     trace: 'on',
     video: 'on',
   },

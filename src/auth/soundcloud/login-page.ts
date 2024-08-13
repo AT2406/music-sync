@@ -14,5 +14,6 @@ export class soundcloudLogin {
   }
   public async navigateTo() {
     await this.page.goto(this.url)
+    await this.page.context().cookies()
   }
 }
