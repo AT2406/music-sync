@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { fetchAndParseRedditPost } from './data/extractor'
+import { fetchAndParseRedditPost } from './data/get-songs-reddit'
 
 // URL of the Reddit post
 const url =
@@ -8,4 +8,3 @@ const url =
 // 'https://www.reddit.com/r/DnB/comments/1eqay7r/new_music_pola_brysons_circles_chase_status_serum/'
 
 fetchAndParseRedditPost(url)
-console.log()
