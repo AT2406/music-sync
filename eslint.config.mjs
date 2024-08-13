@@ -34,7 +34,7 @@ export default tseslint.config(
       'no-case-declarations': 0,
       'no-empty-pattern': 0,
       semi: 0,
-      camelcase: 1,
+      camelcase: 0,
       '@typescript-eslint/no-unused-vars': 2,
       '@typescript-eslint/await-thenable': 1,
       '@typescript-eslint/no-explicit-any': 0,

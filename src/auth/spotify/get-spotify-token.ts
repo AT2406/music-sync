@@ -1,19 +1,23 @@
-import { createServer, IncomingMessage, ServerResponse } from 'http'
+import 'dotenv/config'
+
+import type { Page } from 'playwright'
+import { spotifyLogin } from './login-page'
+
+export function getSpotifyAuthToken(page: Page) {
+  const login = new spotifyLogin(page)
+  const nav = login.navigateTo()
+  return console.log(`Spotify auth: `, nav)
+}
+
 import { parse } from 'url'
 import { URLSearchParams } from 'url'
 import * as querystring from 'querystring'
 import * as randomstring from 'randomstring'
-import 'dotenv/config'
-import { clientInformation, spotifyEndpoints } from '../../utils/constants'
-
-try {
-  console.log(clientInformation)
-} catch (err) {
-  console.error('cannot find client information', err)
-}
-
+import { clientInformation } from '../../utils/constants'
+import { IncomingMessage, ServerResponse } from 'http'
 const redirectUri = 'http://localhost:3000/callback'
 const scope = 'user-read-private user-read-email'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const auth = querystring.stringify({
   response_type: 'code',
   client_id: clientInformation.clientId,
@@ -23,8 +27,7 @@ const auth = querystring.stringify({
   show_dialog: true,
 })
 
-const authUrl = `${spotifyEndpoints.accountAuth}${auth}`
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const requestHandler = (req: IncomingMessage, res: ServerResponse): void => {
   const parsedUrl = parse(req.url || '', true)
   const query = new URLSearchParams(
@@ -41,10 +44,3 @@ const requestHandler = (req: IncomingMessage, res: ServerResponse): void => {
     res.end('Authorization code not found')
   }
 }
-
-const server = createServer(requestHandler)
-
-server.listen(3000, async () => {
-  console.log(`Server started at ${redirectUri}`)
-  console.log('auth url:', authUrl)
-})
