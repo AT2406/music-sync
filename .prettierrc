@@ -7,6 +7,7 @@
   "bracketSpacing": true,
   "singleAttributePerLine": false,
   "arrowParens": "avoid",
+  "endOfLine": "auto",
   "overrides": [
     {
       "files": [
