@@ -41,4 +41,6 @@ export class spotifyLogin {
     await this.passwordInput.fill(process.env.SPOTIFY_PASSWORD || '')
     await this.loginButton.click()
   }
+
+  // page.intercept should be able to grab the return auth token????
 }
