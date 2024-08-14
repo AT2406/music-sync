@@ -42,5 +42,5 @@ export class spotifyLogin {
     await this.loginButton.click()
   }
 
-  // page.intercept should be able to grab the return auth token????
+  // page.intercept from url gew1-dealer.spotify.com/ and then grab token from qsp to return auth token????
 }
