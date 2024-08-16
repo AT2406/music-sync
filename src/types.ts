@@ -12,4 +12,5 @@ export interface SongDetails {
   artist: string
   title: string
   label: string
+  // links?
 }
