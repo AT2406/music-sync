@@ -5,7 +5,7 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import unusedImports from 'eslint-plugin-unused-imports'
 import globals from 'globals'
 
-export default tseslint.config(
+export default [
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
@@ -42,5 +42,8 @@ export default tseslint.config(
       '@typescript-eslint/no-non-null-assertion': 0,
       'unused-imports/no-unused-imports': 2,
     },
-  }
-)
+  },
+  {
+    ignores: ['./dist', ''],
+  },
+]

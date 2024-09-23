@@ -1,14 +1,3 @@
-import 'dotenv/config'
-
-import type { Page } from 'playwright'
-import { spotifyLogin } from './login-page'
-
-export async function getSpotifyAuthToken(page: Page) {
-  const login = new spotifyLogin(page)
-  await login.navigateTo()
-  await login.fillUserDetails()
-}
-
 import { parse } from 'url'
 import { URLSearchParams } from 'url'
 import * as querystring from 'querystring'

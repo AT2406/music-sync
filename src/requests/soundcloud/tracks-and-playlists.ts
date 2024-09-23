@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'dotenv/config'
-import { Soundcloud, API, Me } from 'soundcloud.ts'
+import { Soundcloud } from 'soundcloud.ts'
 
 export async function useAPI() {
   const soundcloud = new Soundcloud(
