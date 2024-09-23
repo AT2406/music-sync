@@ -44,6 +44,6 @@ export default [
     },
   },
   {
-    ignores: ['./dist', ''],
+    ignores: ['./dist'],
   },
 ]
